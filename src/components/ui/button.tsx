@@ -16,6 +16,12 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        console:
+          "border border-telemetry/40 bg-secondary/60 font-display tracking-wider text-telemetry backdrop-blur hover:bg-telemetry/10 hover:shadow-glow",
+        ember:
+          "bg-gradient-primary font-display tracking-wider text-primary-foreground shadow-ember hover:brightness-110",
+        segment:
+          "font-display text-xs tracking-wider text-muted-foreground hover:text-foreground data-[active=true]:bg-telemetry/15 data-[active=true]:text-telemetry",
       },
       size: {
         default: "h-9 px-4 py-2",
