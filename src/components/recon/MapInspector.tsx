@@ -218,7 +218,13 @@ export function MapInspector({
                     <bdi dir="ltr">{formatLat(cursor.lat, lang)}</bdi>{" "}
                     <bdi dir="ltr">{formatLon(cursor.lon, lang)}</bdi>
                   </>,
-                  `${t("pixel")} ${cursor.px}, ${cursor.py}${cursor.xKm !== undefined ? `  ·  ${t("grid")} ${cursor.xKm.toFixed(2)} / ${cursor.yKm?.toFixed(2)} km` : ""}`,
+                  <>
+                    {t("pixel")}{" "}
+                    <bdi dir="ltr">
+                      {cursor.px}, {cursor.py}
+                    </bdi>
+                    {`${cursor.xKm !== undefined ? `  ·  ${t("grid")} ${cursor.xKm.toFixed(2)} / ${cursor.yKm?.toFixed(2)} km` : ""}`}
+                  </>,
                 ]
               : [t("clickHint"), t("keyboardHint")]
           }
@@ -236,7 +242,13 @@ export function MapInspector({
                     <bdi dir="ltr">{formatLat(target.lat, lang)}</bdi>{" "}
                     <bdi dir="ltr">{formatLon(target.lon, lang)}</bdi>
                   </>,
-                  `${t("pixel")} ${target.px}, ${target.py}  ·  ${isGlobal ? t("globalRef") : t("localRef")}`,
+                  <>
+                    {t("pixel")}{" "}
+                    <bdi dir="ltr">
+                      {target.px}, {target.py}
+                    </bdi>{" "}
+                    · {isGlobal ? t("globalRef") : t("localRef")}
+                  </>,
                 ]
               : [t("awaitingTarget"), `${t("resolution")} ${map.width}×${map.height}`]
           }

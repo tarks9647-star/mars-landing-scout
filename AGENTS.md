@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Landing-site scoring lives only in `src/lib/recon-analysis.ts` as pure functions with tests in `src/lib/recon-analysis.test.ts`; UI components never compute scores, so the model stays testable.
+- Map metadata and pixel→coordinate projection live in `src/lib/mars-maps.ts`; add new maps there so the inspector and dashboard pick them up automatically.
+- All UI text comes from the `en`/`ar` dictionaries in `src/lib/i18n.tsx` (ar is typed against en keys) so both languages stay complete; wrap mixed-direction values (coordinates, numbers) in `<bdi dir="ltr">`.
+- Map images are bundled through ES module imports from `src/assets/maps/`, not the CDN pointer system, so the app deploys unchanged to external hosts.

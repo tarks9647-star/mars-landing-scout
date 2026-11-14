@@ -106,7 +106,7 @@ export function TelemetryDashboard({
               digits={0}
               className="col-span-2"
               extra={
-                <span className="font-mono text-[0.68rem] text-muted-foreground">
+                <span className="font-mono text-[0.68rem] text-muted-foreground" dir="ltr">
                   {a.temperature.minC}° / {a.temperature.maxC}°
                 </span>
               }
