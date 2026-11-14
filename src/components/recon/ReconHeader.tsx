@@ -15,7 +15,7 @@ export function ReconHeader({ onOpenGuide }: ReconHeaderProps) {
         <div className="flex items-center gap-3">
           <div className="relative grid size-9 place-items-center rounded-full bg-gradient-primary shadow-ember">
             <div className="size-3 rounded-full bg-background/80" />
-            <div className="absolute inset-[-5px] rounded-full border border-dashed border-primary/50 animate-reticle-spin [transform:translate(0,0)]" />
+            <div className="absolute inset-[-5px] rounded-full border border-dashed border-primary/50 animate-[spin_10s_linear_infinite]" />
           </div>
           <div className="leading-tight">
             <div className="font-display text-lg font-bold tracking-[0.18em]" dir="ltr">
