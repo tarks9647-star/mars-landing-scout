@@ -50,7 +50,7 @@ export function TelemetryDashboard({
   const tone = verdictTone[a.verdict];
 
   return (
-    <div key={targetId} className="space-y-4">
+    <div key={targetId} className="min-w-0 space-y-4">
       {/* Site header */}
       <section className="panel panel-brackets overflow-hidden animate-rise">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3">

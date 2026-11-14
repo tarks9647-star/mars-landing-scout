@@ -81,14 +81,14 @@ export function MapInspector({
     <section className="panel panel-brackets flex flex-col overflow-hidden">
       {/* Map tabs + view mode */}
       <div className="flex flex-wrap items-center gap-2 border-b border-border p-2">
-        <div className="flex flex-1 flex-wrap gap-1" role="tablist">
+        <div className="flex min-w-0 flex-1 gap-1 overflow-x-auto" role="tablist">
           {MARS_MAPS.map((m) => (
             <button
               key={m.id}
               role="tab"
               aria-selected={m.id === map.id}
               onClick={() => onMapChange(m.id)}
-              className="group rounded-md border border-transparent px-3 py-1.5 text-start transition-all hover:bg-secondary aria-selected:border-primary/40 aria-selected:bg-primary/10"
+              className="group shrink-0 rounded-md border border-transparent px-3 py-1.5 text-start transition-all hover:bg-secondary aria-selected:border-primary/40 aria-selected:bg-primary/10"
             >
               <div className="font-display text-sm font-semibold tracking-wide group-aria-selected:text-primary">
                 {t(`map.${m.id}.title` as TranslationKey)}

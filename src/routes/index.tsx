@@ -140,8 +140,8 @@ function ReconConsole() {
   return (
     <div dir={dir} className="min-h-screen">
       <ReconHeader onOpenGuide={() => setGuideOpen(true)} />
-      <main className="mx-auto grid max-w-[1600px] gap-4 px-4 py-4 sm:px-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
-        <div className="space-y-4 lg:sticky lg:top-20 lg:self-start">
+      <main className="mx-auto grid max-w-[1600px] grid-cols-1 gap-4 px-4 py-4 sm:px-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
+        <div className="min-w-0 space-y-4 lg:sticky lg:top-20 lg:self-start">
           <MapInspector
             map={map}
             onMapChange={setMapId}
