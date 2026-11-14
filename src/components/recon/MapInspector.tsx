@@ -1,4 +1,11 @@
-import { useCallback, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import {
+  useCallback,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type PointerEvent,
+  type ReactNode,
+} from "react";
 import { Maximize2, ScanSearch } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatLat, formatLon, useI18n, type TranslationKey } from "@/lib/i18n";
@@ -207,7 +214,10 @@ export function MapInspector({
           lines={
             cursor
               ? [
-                  `${formatLat(cursor.lat, lang)}  ${formatLon(cursor.lon, lang)}`,
+                  <>
+                    <bdi dir="ltr">{formatLat(cursor.lat, lang)}</bdi>{" "}
+                    <bdi dir="ltr">{formatLon(cursor.lon, lang)}</bdi>
+                  </>,
                   `${t("pixel")} ${cursor.px}, ${cursor.py}${cursor.xKm !== undefined ? `  ·  ${t("grid")} ${cursor.xKm.toFixed(2)} / ${cursor.yKm?.toFixed(2)} km` : ""}`,
                 ]
               : [t("clickHint"), t("keyboardHint")]
@@ -219,7 +229,13 @@ export function MapInspector({
           lines={
             target && active
               ? [
-                  `${active.label}  ${formatLat(target.lat, lang)}  ${formatLon(target.lon, lang)}`,
+                  <>
+                    <bdi dir="ltr" className="text-primary">
+                      {active.label}
+                    </bdi>{" "}
+                    <bdi dir="ltr">{formatLat(target.lat, lang)}</bdi>{" "}
+                    <bdi dir="ltr">{formatLon(target.lon, lang)}</bdi>
+                  </>,
                   `${t("pixel")} ${target.px}, ${target.py}  ·  ${isGlobal ? t("globalRef") : t("localRef")}`,
                 ]
               : [t("awaitingTarget"), `${t("resolution")} ${map.width}×${map.height}`]
@@ -236,7 +252,7 @@ function Readout({
   tone,
 }: {
   label: string;
-  lines: string[];
+  lines: ReactNode[];
   tone: "primary" | "telemetry";
 }) {
   return (

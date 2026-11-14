@@ -56,10 +56,13 @@ export function TelemetryDashboard({
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3">
           <div>
             <div className="label-caps">{t("selectedSite")}</div>
-            <div className="font-mono text-sm" dir="ltr">
-              <span className="text-primary">{targetLabel}</span>{" "}
+            <div className="font-mono text-sm">
+              <bdi dir="ltr" className="text-primary">
+                {targetLabel}
+              </bdi>{" "}
               <span className="text-muted-foreground">
-                {formatLat(result.point.lat, lang)} · {formatLon(result.point.lon, lang)}
+                <bdi dir="ltr">{formatLat(result.point.lat, lang)}</bdi> ·{" "}
+                <bdi dir="ltr">{formatLon(result.point.lon, lang)}</bdi>
               </span>
             </div>
           </div>
