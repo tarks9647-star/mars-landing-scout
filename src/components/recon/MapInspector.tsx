@@ -18,7 +18,7 @@ interface MapInspectorProps {
   ready: boolean;
   active: TargetMarker | null;
   others: TargetMarker[];
-  onSelect: (u: number, v: number) => void;
+  onSelect: (u: number, v: number, mode: "new" | "move") => void;
 }
 
 export function MapInspector({ map, onMapChange, ready, active, others, onSelect }: MapInspectorProps) {
@@ -41,7 +41,7 @@ export function MapInspector({ map, onMapChange, ready, active, others, onSelect
   const handleClick = (e: PointerEvent<HTMLDivElement>) => {
     if (!ready) return;
     const uv = toUV(e.clientX, e.clientY);
-    if (uv) onSelect(uv.u, uv.v);
+    if (uv) onSelect(uv.u, uv.v, "new");
   };
   const handleKey = (e: KeyboardEvent<HTMLDivElement>) => {
     if (!ready) return;
@@ -56,7 +56,7 @@ export function MapInspector({ map, onMapChange, ready, active, others, onSelect
     const m = moves[e.key];
     if (!m) return;
     e.preventDefault();
-    onSelect(clamp(base.u + m[0]), clamp(base.v + m[1]));
+    onSelect(clamp(base.u + m[0]), clamp(base.v + m[1]), active ? "move" : "new");
   };
 
   const cursor = hover ? projectPoint(map, hover.u, hover.v) : null;
