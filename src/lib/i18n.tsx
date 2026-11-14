@@ -248,6 +248,6 @@ export function formatLat(lat: number, lang: Lang) {
 }
 
 export function formatLon(lon: number, lang: Lang) {
-  const hemi = lon >= 0 ? (lang === "ar" ? "شر" : "E") : lang === "ar" ? "غ" : "W";
+  const hemi = lon >= 0 ? (lang === "ar" ? "ق" : "E") : lang === "ar" ? "غ" : "W";
   return `${Math.abs(lon).toFixed(2)}°${hemi}`;
 }
