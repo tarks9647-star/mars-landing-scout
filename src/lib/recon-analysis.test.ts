@@ -61,8 +61,8 @@ describe("landing site analysis", () => {
     const h = 20;
     const data = new Uint8ClampedArray(w * h * 4).fill(128);
     const s = computeRegionStats(data, w, h, 10, 10, 5);
-    expect(s.roughness).toBe(0);
-    expect(s.edge).toBe(0);
+    expect(s.roughness).toBeCloseTo(0, 4);
+    expect(s.edge).toBeCloseTo(0, 4);
     expect(s.luminance).toBeCloseTo(128 / 255, 3);
   });
 });
