@@ -130,7 +130,7 @@ export function CompositionDonut({ composition }: { composition: Composition }) 
     value: composition[k],
   }));
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex flex-col items-center gap-4 sm:flex-row">
       <div className="h-44 w-44 shrink-0" dir="ltr">
         <ResponsiveContainer>
           <PieChart>
@@ -151,7 +151,7 @@ export function CompositionDonut({ composition }: { composition: Composition }) 
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <ul className="flex-1 space-y-2">
+      <ul className="w-full flex-1 space-y-2">
         {data.map((d, i) => (
           <li key={d.name} className="text-xs">
             <div className="mb-1 flex items-center justify-between gap-2">
