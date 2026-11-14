@@ -85,7 +85,7 @@ export function computeRegionStats(
 
   const L = (x: number, y: number) => {
     const i = (y * width + x) * 4;
-    return lum(data[i] / 255, data[i + 1] / 255, data[i + 2] / 255);
+    return lum((data[i] ?? 0) / 255, (data[i + 1] ?? 0) / 255, (data[i + 2] ?? 0) / 255);
   };
 
   let n = 0;
@@ -103,9 +103,9 @@ export function computeRegionStats(
       const dy = y - cy;
       if (dx * dx + dy * dy > r2) continue;
       const i = (y * width + x) * 4;
-      const r = data[i] / 255;
-      const g = data[i + 1] / 255;
-      const b = data[i + 2] / 255;
+      const r = (data[i] ?? 0) / 255;
+      const g = (data[i + 1] ?? 0) / 255;
+      const b = (data[i + 2] ?? 0) / 255;
       const l = lum(r, g, b);
       n++;
       sumL += l;
@@ -121,7 +121,16 @@ export function computeRegionStats(
   }
 
   if (n === 0) {
-    return { luminance: 0, pointLuminance: 0, roughness: 0, edge: 0, r: 0, g: 0, b: 0, saturation: 0 };
+    return {
+      luminance: 0,
+      pointLuminance: 0,
+      roughness: 0,
+      edge: 0,
+      r: 0,
+      g: 0,
+      b: 0,
+      saturation: 0,
+    };
   }
 
   const mean = sumL / n;
@@ -185,15 +194,22 @@ export function estimateComposition(stats: PixelStats): Composition {
   return toPercentages({
     basalt: 0.05 + (1 - L) * 0.6 * gray + colorW * Math.max(0, (r + b) / 2 - g + 0.05) * 3,
     ironOxide: 0.05 + 0.15 * gray + colorW * Math.max(0, r - b) * 3,
-    sulfates: 0.04 + L * roughness * 0.5 * gray + colorW * Math.max(0, (r + g) / 2 - b - 0.05) * 2.5 * L,
+    sulfates:
+      0.04 + L * roughness * 0.5 * gray + colorW * Math.max(0, (r + g) / 2 - b - 0.05) * 2.5 * L,
     clays: 0.04 + 0.08 * gray + colorW * Math.max(0, g - r + 0.03) * 4,
     dust: 0.05 + L * 0.55 * gray * (1 - roughness) + colorW * (1 - saturation) * 0.15,
   });
 }
 
-export function estimateTemperature(latitude: number, elevationKm: number, luminance: number, dustPct: number) {
+export function estimateTemperature(
+  latitude: number,
+  elevationKm: number,
+  luminance: number,
+  dustPct: number,
+) {
   const absLat = Math.min(90, Math.abs(latitude));
-  const meanC = -30 - 90 * Math.pow(absLat / 90, 1.5) - 2.2 * Math.max(0, elevationKm) + (0.5 - luminance) * 14;
+  const meanC =
+    -30 - 90 * Math.pow(absLat / 90, 1.5) - 2.2 * Math.max(0, elevationKm) + (0.5 - luminance) * 14;
   const amplitudeC = 85 * (1 - absLat / 130) * (1 - (dustPct / 100) * 0.35);
   return {
     meanC: Math.round(meanC),
@@ -223,7 +239,12 @@ export function verdictFor(safetyScore: number): Verdict {
 
 export function analyzeSite(stats: PixelStats, ctx: SiteContext): SiteAnalysis {
   const composition = estimateComposition(stats);
-  const temperature = estimateTemperature(ctx.latitude, ctx.elevationKm, stats.luminance, composition.dust);
+  const temperature = estimateTemperature(
+    ctx.latitude,
+    ctx.elevationKm,
+    stats.luminance,
+    composition.dust,
+  );
   const ice = estimateIce(ctx.latitude, ctx.elevationKm, composition.clays);
 
   const slopeDeg = round1(clamp(stats.edge * 55 + stats.roughness * 15, 0, 45));

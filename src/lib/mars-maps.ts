@@ -43,7 +43,15 @@ export const MARS_MAPS: MarsMap[] = [
     src: craterGeology,
     width: 1080,
     height: 1096,
-    geometry: { type: "local", refLat: -8.4, refLon: -61.2, spanXKm: 120, spanYKm: 122, baseElevKm: -1.6, reliefKm: 1.4 },
+    geometry: {
+      type: "local",
+      refLat: -8.4,
+      refLon: -61.2,
+      spanXKm: 120,
+      spanYKm: 122,
+      baseElevKm: -1.6,
+      reliefKm: 1.4,
+    },
     defaultTarget: { u: 0.62, v: 0.5 },
   },
   {
@@ -51,7 +59,15 @@ export const MARS_MAPS: MarsMap[] = [
     src: roverTraverse,
     width: 685,
     height: 1101,
-    geometry: { type: "local", refLat: -2.3, refLon: -5.2, spanXKm: 2.1, spanYKm: 3.4, baseElevKm: -1.9, reliefKm: 0.35 },
+    geometry: {
+      type: "local",
+      refLat: -2.3,
+      refLon: -5.2,
+      spanXKm: 2.1,
+      spanYKm: 3.4,
+      baseElevKm: -1.9,
+      reliefKm: 0.35,
+    },
     defaultTarget: { u: 0.25, v: 0.42 },
   },
   {
@@ -64,7 +80,7 @@ export const MARS_MAPS: MarsMap[] = [
   },
 ];
 
-export const getMap = (id: MapId) => MARS_MAPS.find((m) => m.id === id) ?? MARS_MAPS[0];
+export const getMap = (id: MapId): MarsMap => MARS_MAPS.find((m) => m.id === id) ?? MARS_MAPS[0]!;
 
 export interface ProjectedPoint {
   lat: number;

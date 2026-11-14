@@ -1,6 +1,12 @@
 import { Crosshair, Globe2, Languages, ListChecks, Satellite } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useI18n, type TranslationKey } from "@/lib/i18n";
 
 interface GuideDialogProps {
@@ -31,8 +37,12 @@ export function GuideDialog({ open, onOpenChange }: GuideDialogProps) {
           <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-telemetry/10 to-transparent" />
           <DialogHeader className="relative text-start">
             <div className="label-caps text-telemetry">ARES·RECON // BRIEFING</div>
-            <DialogTitle className="font-display text-2xl tracking-wide">{t("guideTitle")}</DialogTitle>
-            <DialogDescription className="text-sm leading-relaxed">{t("guideIntro")}</DialogDescription>
+            <DialogTitle className="font-display text-2xl tracking-wide">
+              {t("guideTitle")}
+            </DialogTitle>
+            <DialogDescription className="text-sm leading-relaxed">
+              {t("guideIntro")}
+            </DialogDescription>
           </DialogHeader>
         </div>
 

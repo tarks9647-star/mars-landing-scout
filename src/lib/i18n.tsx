@@ -1,4 +1,12 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 
 const en = {
   appName: "ARES·RECON",
@@ -78,11 +86,13 @@ const en = {
     "ARES·RECON turns NASA Mars imagery into a landing reconnaissance console. Drop a target anywhere and the console reads the raster under it to estimate how safe it is to land there.",
   guideFeaturesTitle: "What it offers",
   "feature.maps.title": "Native NASA rasters",
-  "feature.maps.desc": "Crater geology, rover traverse and global elevation maps at full resolution.",
+  "feature.maps.desc":
+    "Crater geology, rover traverse and global elevation maps at full resolution.",
   "feature.inspect.title": "Free point inspection",
   "feature.inspect.desc": "Click-to-target crosshairs with live coordinate tracking.",
   "feature.telemetry.title": "Live telemetry",
-  "feature.telemetry.desc": "Safety score, risk profile, composition, ice and thermal charts update instantly.",
+  "feature.telemetry.desc":
+    "Safety score, risk profile, composition, ice and thermal charts update instantly.",
   "feature.log.title": "Target log",
   "feature.log.desc": "Compare recent candidate sites and jump back to any of them.",
   "feature.lang.title": "Bilingual console",

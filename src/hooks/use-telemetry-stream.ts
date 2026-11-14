@@ -18,8 +18,12 @@ function sample(tick: number, a: SiteAnalysis, roughness: number): TelemetryPoin
   const minutes = (START_MINUTES + tick * STEP_MINUTES) % SOL_MINUTES;
   const frac = minutes / SOL_MINUTES;
   const { meanC, amplitudeC } = a.temperature;
-  const temp = meanC + (amplitudeC / 2) * Math.sin(2 * Math.PI * (frac - 0.375)) + (Math.random() - 0.5) * 3;
-  const wind = Math.max(0, 4 + roughness * 8 + Math.sin(tick / 3) * 2 + (Math.random() - 0.5) * 2.5);
+  const temp =
+    meanC + (amplitudeC / 2) * Math.sin(2 * Math.PI * (frac - 0.375)) + (Math.random() - 0.5) * 3;
+  const wind = Math.max(
+    0,
+    4 + roughness * 8 + Math.sin(tick / 3) * 2 + (Math.random() - 0.5) * 2.5,
+  );
   const pressure = 610 * Math.exp(-a.elevationKm / 11.1) + (Math.random() - 0.5) * 6;
   const hh = Math.floor(minutes / 60) % 24;
   const mm = Math.floor(minutes % 60);
@@ -33,7 +37,11 @@ function sample(tick: number, a: SiteAnalysis, roughness: number): TelemetryPoin
 }
 
 /** Simulated live sensor stream seeded from the selected site's analysis. Client-only. */
-export function useTelemetryStream(key: string | null, analysis: SiteAnalysis | null, roughness: number) {
+export function useTelemetryStream(
+  key: string | null,
+  analysis: SiteAnalysis | null,
+  roughness: number,
+) {
   const [series, setSeries] = useState<TelemetryPoint[]>([]);
 
   useEffect(() => {

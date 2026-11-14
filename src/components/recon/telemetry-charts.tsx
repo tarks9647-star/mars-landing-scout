@@ -59,7 +59,13 @@ export function SafetyGauge({ score, verdict }: { score: number; verdict: Verdic
           barSize={14}
         >
           <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
-          <RadialBar dataKey="value" cornerRadius={8} fill={color} background={{ fill: "var(--muted)" }} animationDuration={700} />
+          <RadialBar
+            dataKey="value"
+            cornerRadius={8}
+            fill={color}
+            background={{ fill: "var(--muted)" }}
+            animationDuration={700}
+          />
         </RadialBarChart>
       </ResponsiveContainer>
       <div className="pointer-events-none absolute inset-0 grid place-items-center">
@@ -74,7 +80,14 @@ export function SafetyGauge({ score, verdict }: { score: number; verdict: Verdic
   );
 }
 
-const RISK_KEYS: (keyof RiskBreakdown)[] = ["terrain", "slope", "hazard", "altitude", "thermal", "dust"];
+const RISK_KEYS: (keyof RiskBreakdown)[] = [
+  "terrain",
+  "slope",
+  "hazard",
+  "altitude",
+  "thermal",
+  "dust",
+];
 
 export function RiskRadar({ risks }: { risks: RiskBreakdown }) {
   const { t } = useI18n();
@@ -102,11 +115,20 @@ export function RiskRadar({ risks }: { risks: RiskBreakdown }) {
 }
 
 const MINERAL_KEYS: (keyof Composition)[] = ["basalt", "ironOxide", "sulfates", "clays", "dust"];
-const MINERAL_COLORS = ["var(--chart-5)", "var(--chart-1)", "var(--chart-3)", "var(--chart-4)", "var(--chart-2)"];
+const MINERAL_COLORS = [
+  "var(--chart-5)",
+  "var(--chart-1)",
+  "var(--chart-3)",
+  "var(--chart-4)",
+  "var(--chart-2)",
+];
 
 export function CompositionDonut({ composition }: { composition: Composition }) {
   const { t } = useI18n();
-  const data = MINERAL_KEYS.map((k) => ({ name: t(`min.${k}` as TranslationKey), value: composition[k] }));
+  const data = MINERAL_KEYS.map((k) => ({
+    name: t(`min.${k}` as TranslationKey),
+    value: composition[k],
+  }));
   return (
     <div className="flex items-center gap-4">
       <div className="h-44 w-44 shrink-0" dir="ltr">
@@ -152,7 +174,15 @@ export function CompositionDonut({ composition }: { composition: Composition }) 
   );
 }
 
-export function ThermalStream({ series, minC, maxC }: { series: TelemetryPoint[]; minC: number; maxC: number }) {
+export function ThermalStream({
+  series,
+  minC,
+  maxC,
+}: {
+  series: TelemetryPoint[];
+  minC: number;
+  maxC: number;
+}) {
   const { t } = useI18n();
   return (
     <div className="h-48 w-full" dir="ltr">
@@ -206,9 +236,23 @@ export function IceComparison({ data }: { data: IceComparisonDatum[] }) {
     <div className="h-32 w-full" dir="ltr">
       <ResponsiveContainer>
         <BarChart data={data} margin={{ top: 4, right: 4, left: -22, bottom: 0 }}>
-          <XAxis dataKey="label" tick={{ fill: "var(--muted-foreground)", fontSize: 10 }} axisLine={false} tickLine={false} />
-          <YAxis domain={[0, 100]} tick={{ fill: "var(--muted-foreground)", fontSize: 10 }} axisLine={false} tickLine={false} />
-          <Tooltip {...tooltipStyle} cursor={{ fill: "var(--muted)", fillOpacity: 0.4 }} formatter={(v: number) => [`${v}%`, t("iceIndex")]} />
+          <XAxis
+            dataKey="label"
+            tick={{ fill: "var(--muted-foreground)", fontSize: 10 }}
+            axisLine={false}
+            tickLine={false}
+          />
+          <YAxis
+            domain={[0, 100]}
+            tick={{ fill: "var(--muted-foreground)", fontSize: 10 }}
+            axisLine={false}
+            tickLine={false}
+          />
+          <Tooltip
+            {...tooltipStyle}
+            cursor={{ fill: "var(--muted)", fillOpacity: 0.4 }}
+            formatter={(v: number) => [`${v}%`, t("iceIndex")]}
+          />
           <Bar dataKey="value" radius={[4, 4, 0, 0]} animationDuration={600}>
             {data.map((d) => (
               <Cell key={d.label} fill={d.active ? "var(--telemetry)" : "var(--chart-5)"} />

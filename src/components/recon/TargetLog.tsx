@@ -39,7 +39,10 @@ export function TargetLog({ entries, activeId, onPick }: TargetLogProps) {
                     {t(`map.${e.mapId}.title` as TranslationKey)}
                   </span>
                 </span>
-                <span className="font-display text-lg font-semibold tabular-nums" style={{ color: verdictTone[e.verdict] }}>
+                <span
+                  className="font-display text-lg font-semibold tabular-nums"
+                  style={{ color: verdictTone[e.verdict] }}
+                >
                   {e.safety}
                 </span>
               </button>

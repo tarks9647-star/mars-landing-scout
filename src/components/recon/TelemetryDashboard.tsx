@@ -21,9 +21,18 @@ interface TelemetryDashboardProps {
   iceComparison: IceComparisonDatum[];
 }
 
-export function TelemetryDashboard({ targetId, targetLabel, result, iceComparison }: TelemetryDashboardProps) {
+export function TelemetryDashboard({
+  targetId,
+  targetLabel,
+  result,
+  iceComparison,
+}: TelemetryDashboardProps) {
   const { t, lang } = useI18n();
-  const series = useTelemetryStream(targetId, result?.analysis ?? null, result?.stats.roughness ?? 0);
+  const series = useTelemetryStream(
+    targetId,
+    result?.analysis ?? null,
+    result?.stats.roughness ?? 0,
+  );
   const latest = series.at(-1);
 
   if (!result || !targetLabel) {
@@ -64,10 +73,28 @@ export function TelemetryDashboard({ targetId, targetLabel, result, iceCompariso
         <div className="grid gap-4 p-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           <SafetyGauge score={a.safetyScore} verdict={a.verdict} />
           <div className="grid grid-cols-2 gap-2">
-            <Stat icon={<ShieldAlert />} label={t("missionRisk")} value={a.riskPercent} unit="%" digits={0} />
+            <Stat
+              icon={<ShieldAlert />}
+              label={t("missionRisk")}
+              value={a.riskPercent}
+              unit="%"
+              digits={0}
+            />
             <Stat icon={<Gauge />} label={t("slope")} value={a.slopeDeg} unit="°" digits={1} />
-            <Stat icon={<Mountain />} label={t("elevation")} value={a.elevationKm} unit="km" digits={1} />
-            <Stat icon={<Droplets />} label={t("iceDistance")} value={a.ice.distanceKm} unit="km" digits={0} />
+            <Stat
+              icon={<Mountain />}
+              label={t("elevation")}
+              value={a.elevationKm}
+              unit="km"
+              digits={1}
+            />
+            <Stat
+              icon={<Droplets />}
+              label={t("iceDistance")}
+              value={a.ice.distanceKm}
+              unit="km"
+              digits={0}
+            />
             <Stat
               icon={<Thermometer />}
               label={t("surfaceTemp")}
@@ -106,7 +133,11 @@ export function TelemetryDashboard({ targetId, targetLabel, result, iceCompariso
         <ThermalStream series={series} minC={a.temperature.minC} maxC={a.temperature.maxC} />
         <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
           <Mini label={t("temperature")} value={latest ? `${latest.temp.toFixed(1)} °C` : "—"} />
-          <Mini label={t("wind")} value={latest ? `${latest.wind.toFixed(1)} m/s` : "—"} icon={<Wind />} />
+          <Mini
+            label={t("wind")}
+            value={latest ? `${latest.wind.toFixed(1)} m/s` : "—"}
+            icon={<Wind />}
+          />
           <Mini label={t("pressure")} value={latest ? `${latest.pressure} Pa` : "—"} />
           <Mini label={t("localTime")} value={latest?.time ?? "—"} />
         </div>
@@ -130,7 +161,15 @@ export function TelemetryDashboard({ targetId, targetLabel, result, iceCompariso
   );
 }
 
-function Panel({ title, badge, children }: { title: string; badge?: ReactNode; children: ReactNode }) {
+function Panel({
+  title,
+  badge,
+  children,
+}: {
+  title: string;
+  badge?: ReactNode;
+  children: ReactNode;
+}) {
   return (
     <section className="panel panel-brackets p-4 animate-rise">
       <div className="mb-3 flex items-center justify-between">
@@ -197,7 +236,9 @@ function Meter({ label, value }: { label: string; value: number }) {
     <div>
       <div className="mb-1.5 flex items-baseline justify-between">
         <span className="text-xs text-muted-foreground">{label}</span>
-        <span className="font-display text-2xl font-semibold text-telemetry tabular-nums">{Math.round(shown)}%</span>
+        <span className="font-display text-2xl font-semibold text-telemetry tabular-nums">
+          {Math.round(shown)}%
+        </span>
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-muted">
         <div

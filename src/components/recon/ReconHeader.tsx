@@ -35,7 +35,13 @@ export function ReconHeader({ onOpenGuide }: ReconHeaderProps) {
             <Info />
             {t("guide")}
           </Button>
-          <Button variant="ember" size="sm" onClick={toggleLang} aria-label={t("langAria")} className="min-w-[4.5rem]">
+          <Button
+            variant="ember"
+            size="sm"
+            onClick={toggleLang}
+            aria-label={t("langAria")}
+            className="min-w-[4.5rem]"
+          >
             <Languages />
             {t("langToggle")}
           </Button>

@@ -21,7 +21,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "ARES·RECON — Mars Landing Site Reconnaissance" },
       {
         property: "og:description",
-        content: "Click-to-target Mars landing reconnaissance with live telemetry charts, in English and Arabic.",
+        content:
+          "Click-to-target Mars landing reconnaissance with live telemetry charts, in English and Arabic.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -84,7 +85,9 @@ function ReconConsole() {
     (u: number, v: number) => {
       const id = activeByMap[map.id];
       if (!pixels || !id) return;
-      setTargets((prev) => prev.map((tg) => (tg.id === id ? { ...tg, u, v, result: inspect(map, pixels, u, v) } : tg)));
+      setTargets((prev) =>
+        prev.map((tg) => (tg.id === id ? { ...tg, u, v, result: inspect(map, pixels, u, v) } : tg)),
+      );
     },
     [activeByMap, map, pixels],
   );
@@ -100,7 +103,12 @@ function ReconConsole() {
 
   const markers = useMemo(() => {
     const onMap = targets.filter((tg) => tg.mapId === map.id);
-    const toMarker = (tg: Target): TargetMarker => ({ id: tg.id, label: tg.label, u: tg.u, v: tg.v });
+    const toMarker = (tg: Target): TargetMarker => ({
+      id: tg.id,
+      label: tg.label,
+      u: tg.u,
+      v: tg.v,
+    });
     return {
       active: activeTarget ? toMarker(activeTarget) : null,
       others: onMap.filter((tg) => tg.id !== activeTarget?.id).map(toMarker),
@@ -142,7 +150,11 @@ function ReconConsole() {
             others={markers.others}
             onSelect={(u, v, mode) => (mode === "move" ? moveActive(u, v) : createTarget(u, v))}
           />
-          <TargetLog entries={logEntries} activeId={activeTarget?.id ?? null} onPick={pickFromLog} />
+          <TargetLog
+            entries={logEntries}
+            activeId={activeTarget?.id ?? null}
+            onPick={pickFromLog}
+          />
         </div>
         <TelemetryDashboard
           targetId={activeTarget?.id ?? null}

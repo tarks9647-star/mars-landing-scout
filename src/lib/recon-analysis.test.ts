@@ -29,18 +29,30 @@ describe("landing site analysis", () => {
   });
 
   it("rates rough, steep, high terrain as NO-GO (safety below 45)", () => {
-    const a = analyzeSite(gray({ roughness: 0.7, edge: 0.6 }), { kind: "elevation", latitude: 5, elevationKm: 8 });
+    const a = analyzeSite(gray({ roughness: 0.7, edge: 0.6 }), {
+      kind: "elevation",
+      latitude: 5,
+      elevationKm: 8,
+    });
     expect(a.verdict).toBe("nogo");
     expect(a.safetyScore).toBeLessThan(45);
   });
 
   it("caps estimated slope at 45 degrees", () => {
-    const a = analyzeSite(gray({ roughness: 1, edge: 1 }), { kind: "traverse", latitude: 0, elevationKm: 0 });
+    const a = analyzeSite(gray({ roughness: 1, edge: 1 }), {
+      kind: "traverse",
+      latitude: 0,
+      elevationKm: 0,
+    });
     expect(a.slopeDeg).toBe(45);
   });
 
   it("rock composition always sums to exactly 100%", () => {
-    const samples = [gray(), gray({ r: 0.8, g: 0.5, b: 0.3, saturation: 0.6 }), gray({ luminance: 0.9, roughness: 0.4 })];
+    const samples = [
+      gray(),
+      gray({ r: 0.8, g: 0.5, b: 0.3, saturation: 0.6 }),
+      gray({ luminance: 0.9, roughness: 0.4 }),
+    ];
     for (const s of samples) {
       const c = estimateComposition(s);
       expect(Object.values(c).reduce((x, y) => x + y, 0)).toBe(100);

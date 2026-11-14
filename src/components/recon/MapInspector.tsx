@@ -21,7 +21,14 @@ interface MapInspectorProps {
   onSelect: (u: number, v: number, mode: "new" | "move") => void;
 }
 
-export function MapInspector({ map, onMapChange, ready, active, others, onSelect }: MapInspectorProps) {
+export function MapInspector({
+  map,
+  onMapChange,
+  ready,
+  active,
+  others,
+  onSelect,
+}: MapInspectorProps) {
   const { t, lang } = useI18n();
   const [native, setNative] = useState(false);
   const [hover, setHover] = useState<{ u: number; v: number } | null>(null);
@@ -79,12 +86,19 @@ export function MapInspector({ map, onMapChange, ready, active, others, onSelect
               <div className="font-display text-sm font-semibold tracking-wide group-aria-selected:text-primary">
                 {t(`map.${m.id}.title` as TranslationKey)}
               </div>
-              <div className="text-[0.68rem] text-muted-foreground">{t(`map.${m.id}.sub` as TranslationKey)}</div>
+              <div className="text-[0.68rem] text-muted-foreground">
+                {t(`map.${m.id}.sub` as TranslationKey)}
+              </div>
             </button>
           ))}
         </div>
         <div className="flex rounded-md border border-border bg-secondary/40 p-0.5">
-          <Button variant="segment" size="sm" data-active={!native} onClick={() => setNative(false)}>
+          <Button
+            variant="segment"
+            size="sm"
+            data-active={!native}
+            onClick={() => setNative(false)}
+          >
             <Maximize2 />
             {t("fitView")}
           </Button>
@@ -129,7 +143,9 @@ export function MapInspector({ map, onMapChange, ready, active, others, onSelect
             <div className="pointer-events-none absolute inset-0 overflow-hidden bg-background/40">
               <div className="absolute inset-x-0 h-1/3 bg-gradient-to-b from-transparent via-telemetry/25 to-transparent animate-sweep" />
               <div className="absolute inset-0 grid place-items-center">
-                <span className="rounded bg-background/80 px-3 py-1 font-mono text-xs text-telemetry">{t("calibrating")}</span>
+                <span className="rounded bg-background/80 px-3 py-1 font-mono text-xs text-telemetry">
+                  {t("calibrating")}
+                </span>
               </div>
             </div>
           )}
@@ -214,12 +230,27 @@ export function MapInspector({ map, onMapChange, ready, active, others, onSelect
   );
 }
 
-function Readout({ label, lines, tone }: { label: string; lines: string[]; tone: "primary" | "telemetry" }) {
+function Readout({
+  label,
+  lines,
+  tone,
+}: {
+  label: string;
+  lines: string[];
+  tone: "primary" | "telemetry";
+}) {
   return (
     <div className="bg-card px-3 py-2">
-      <div className={`label-caps mb-0.5 ${tone === "primary" ? "!text-primary" : "!text-telemetry"}`}>{label}</div>
+      <div
+        className={`label-caps mb-0.5 ${tone === "primary" ? "!text-primary" : "!text-telemetry"}`}
+      >
+        {label}
+      </div>
       {lines.map((l, i) => (
-        <div key={i} className={`truncate font-mono ${i === 0 ? "text-foreground" : "text-muted-foreground"}`}>
+        <div
+          key={i}
+          className={`truncate font-mono ${i === 0 ? "text-foreground" : "text-muted-foreground"}`}
+        >
           {l}
         </div>
       ))}
