@@ -12,10 +12,15 @@ export function ReconHeader({ onOpenGuide }: ReconHeaderProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-[1600px] items-center gap-4 px-4 sm:px-6">
-        <div className="flex items-center gap-3">
-          <div className="relative grid size-9 place-items-center rounded-full bg-gradient-primary shadow-ember">
-            <div className="size-3 rounded-full bg-background/80" />
-            <div className="absolute inset-[-5px] rounded-full border border-dashed border-primary/50 animate-[spin_10s_linear_infinite]" />
+        <div className="flex min-w-0 items-center gap-3">
+          <div className="relative size-11 shrink-0 overflow-hidden rounded-lg border border-primary/40 bg-background shadow-ember">
+            <img
+              src="/ares-recon-logo.jpeg"
+              alt={t("appName")}
+              width={1402}
+              height={1122}
+              className="size-full object-cover"
+            />
           </div>
           <div className="leading-tight">
             <div className="font-display text-lg font-bold tracking-[0.18em]" dir="ltr">
