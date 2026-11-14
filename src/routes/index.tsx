@@ -56,6 +56,7 @@ function ReconConsole() {
   const [targets, setTargets] = useState<Target[]>([]);
   const [activeByMap, setActiveByMap] = useState<Partial<Record<MapId, string>>>({});
   const counter = useRef(0);
+  const seeded = useRef(new Set<MapId>());
 
   const map = getMap(mapId);
   const pixels = useImageSampler(map.src);
@@ -90,7 +91,9 @@ function ReconConsole() {
 
   // Drop a default target the first time each map finishes calibrating.
   useEffect(() => {
-    if (pixels && !activeByMap[map.id]) createTarget(map.defaultTarget.u, map.defaultTarget.v);
+    if (!pixels || activeByMap[map.id] || seeded.current.has(map.id)) return;
+    seeded.current.add(map.id);
+    createTarget(map.defaultTarget.u, map.defaultTarget.v);
   }, [pixels, map, activeByMap, createTarget]);
 
   const activeTarget = targets.find((tg) => tg.id === activeByMap[map.id]) ?? null;
